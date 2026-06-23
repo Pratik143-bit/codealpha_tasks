@@ -1,30 +1,35 @@
-from deep_translator import GoogleTranslator
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
-print("===== Language Translator =====")
+faq_questions = [
+    "What is admission process?",
+    "What are college timings?",
+    "Where is the college located?",
+    "What courses are available?",
+    "How can I contact the college?"
+]
 
-text = input("Enter Text: ")
+faq_answers = [
+    "You can apply online through the college website.",
+    "College timings are 10 AM to 5 PM.",
+    "The college is located in Sangli, Maharashtra.",
+    "The college offers Engineering, MBA and Diploma courses.",
+    "You can contact the college through phone or email."
+]
 
-print("\nSelect Language")
-print("1. Marathi")
-print("2. Hindi")
-print("3. French")
+vectorizer = TfidfVectorizer()
+X = vectorizer.fit_transform(faq_questions)
 
-choice = input("Enter Choice: ")
+print("===== FAQ Chatbot =====")
 
-languages = {
-    "1": "mr",
-    "2": "hi",
-    "3": "fr"
-}
+while True:
+    query = input("\nAsk a Question (type exit to quit): ")
 
-if choice in languages:
-    translated = GoogleTranslator(
-        source='auto',
-        target=languages[choice]
-    ).translate(text)
+    if query.lower() == "exit":
+        break
 
-    print("\nTranslated Text:")
-    print(translated)
+    query_vector = vectorizer.transform([query])
+    similarity = cosine_similarity(query_vector, X)
+    index = similarity.argmax()
 
-else:
-    print("Invalid Choice")
+    print("Bot:", faq_answers[index])
