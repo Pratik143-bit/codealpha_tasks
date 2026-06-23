@@ -1,25 +1,19 @@
-# CodeAlpha Language Translation Tool
+# CodeAlpha FAQ Chatbot
 
 ## Project Description
-This project is developed as part of the CodeAlpha Artificial Intelligence Internship.
-
-The Language Translation Tool allows users to enter text and translate it into different languages using Google Translator API.
+This chatbot answers frequently asked questions using NLP.
 
 ## Features
-- Translate text into multiple languages
-- Automatic source language detection
-- Simple and user-friendly interface
-- Fast translation response
+- FAQ based chatbot
+- Similarity matching
+- Instant responses
 
 ## Technologies Used
 - Python
-- Deep Translator
-
-## Installation
-
-pip install -r requirements.txt
+- Scikit-learn
 
 ## Run Project
+pip install -r requirements.txt
 
 python app.py
 
